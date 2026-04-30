@@ -19,6 +19,8 @@ public class Typist
     private boolean burntOut = false;
     private int burnoutTurns = 0;
 
+    private boolean justMistyped = false;
+
 
     // Constructor of class Typist
     /**
@@ -191,6 +193,16 @@ public class Typist
     public void setSymbol(char newSymbol)
     {
         this.typistSymbol = newSymbol; 
+    }
+
+    public boolean justMistyped() 
+    { 
+        return this.justMistyped; 
+    }
+
+    public void setJustMistyped(boolean justMistyped) 
+    { 
+        this.justMistyped = justMistyped; 
     }
 
 }

@@ -8,8 +8,8 @@ import java.util.concurrent.TimeUnit;
  * two-finger technique". He assured us the code was "basically done".
  * We have found evidence to the contrary.
  *
- * @author TyPosaurus
- * @version 0.7 (the other 0.3 is left as an exercise for the reader)
+ * @author Ananthan Sivakumaran
+ * @version 1.4
  */
 public class TypingRace
 {
@@ -80,9 +80,6 @@ public class TypingRace
      * Starts the typing race.
      * All typists are reset to the beginning, then the simulation runs
      * turn by turn until one typist completes the full passage.
-     *
-     * Note from Ty: "I didn't bother printing the winner at the end,
-     * you can probably figure that out yourself."
      */
     public void startRace()
     {
@@ -90,7 +87,6 @@ public class TypingRace
         Typist winner = null;
 
         // Reset all typists to the start of the passage
-        // (Ty was in a hurry here)
         seat1Typist.resetToStart();
         seat2Typist.resetToStart();
         seat3Typist.resetToStart();
@@ -161,6 +157,11 @@ public class TypingRace
         if (Math.random() < (1 - theTypist.getAccuracy()) * MISTYPE_BASE_CHANCE)
         {
             theTypist.slideBack(SLIDE_BACK_AMOUNT);
+            theTypist.setJustMistyped(true);
+        }
+        else 
+        {
+            theTypist.setJustMistyped(false);
         }
 
         // Burnout check — pushing too hard increases burnout risk
@@ -244,6 +245,11 @@ public class TypingRace
         {
             System.out.print('~');
             spacesAfter--; // symbol + ~ together take two characters
+        }
+
+        if (theTypist.justMistyped())
+        {
+            System.out.print("<");
         }
 
         multiplePrint(' ', spacesAfter);
