@@ -1,5 +1,4 @@
 import java.util.concurrent.TimeUnit;
-import java.lang.Math;
 
 /**
  * A typing race simulation. Three typists race to complete a passage of text,
@@ -24,6 +23,21 @@ public class TypingRace
     private static final double MISTYPE_BASE_CHANCE = 0.3;
     private static final int    SLIDE_BACK_AMOUNT   = 2;
     private static final int    BURNOUT_DURATION     = 3;
+
+    public static void main(String[] args)
+    {
+        TypingRace race = new TypingRace(40);
+
+        Typist t1 = new Typist('①', "TURBOFINGERS", 0.85);
+        Typist t2 = new Typist('②', "QWERTY_QUEEN", 0.60);
+        Typist t3 = new Typist('③', "HUNT_N_PECK", 0.30);
+
+        race.addTypist(t1, 1);
+        race.addTypist(t2, 2);
+        race.addTypist(t3, 3);
+
+        race.startRace();
+    }
 
     /**
      * Constructor for objects of class TypingRace.

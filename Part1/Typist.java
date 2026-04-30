@@ -1,6 +1,4 @@
 /**
- * Write a description of class Typist here.
- *
  * Represents a typist in a typing race simulation.
  * Each typist has a username, unique identifying symbol, accuracy rating which affects progress and burnout risk,
  * progress tracker, burnout tracker and burnoutTurns tracker.
