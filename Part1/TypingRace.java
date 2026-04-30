@@ -28,13 +28,9 @@ public class TypingRace
     {
         TypingRace race = new TypingRace(40);
 
-        Typist t1 = new Typist('①', "TURBOFINGERS", 0.85);
-        Typist t2 = new Typist('②', "QWERTY_QUEEN", 0.60);
-        Typist t3 = new Typist('③', "HUNT_N_PECK", 0.30);
-
-        race.addTypist(t1, 1);
-        race.addTypist(t2, 2);
-        race.addTypist(t3, 3);
+        race.addTypist(new Typist('①', "TURBOFINGERS", 0.85), 1);
+        race.addTypist(new Typist('②', "QWERTY_QUEEN", 0.60), 2);
+        race.addTypist(new Typist('③', "HUNT_N_PECK", 0.30), 3);
 
         race.startRace();
     }
@@ -91,11 +87,13 @@ public class TypingRace
     public void startRace()
     {
         boolean finished = false;
+        Typist winner = null;
 
         // Reset all typists to the start of the passage
         // (Ty was in a hurry here)
         seat1Typist.resetToStart();
         seat2Typist.resetToStart();
+        seat3Typist.resetToStart();
 
         while (!finished)
         {
@@ -107,19 +105,28 @@ public class TypingRace
             // Print the current state of the race
             printRace();
 
-            // Check if any typist has finished the passage
-            if ( raceFinishedBy(seat1Typist) || raceFinishedBy(seat2Typist) || raceFinishedBy(seat3Typist) )
-            {
+            // Check if any typist has finished the passage, setting the winner if they have
+            if(raceFinishedBy(seat1Typist)) {
                 finished = true;
+                winner = seat1Typist;
             }
-
+            else if(raceFinishedBy(seat2Typist)) {
+                finished = true;
+                winner = seat2Typist;
+            }
+            else if(raceFinishedBy(seat3Typist)) {
+                finished = true;
+                winner = seat3Typist;
+            }
             // Wait 200ms between turns so the animation is visible
             try {
                 TimeUnit.MILLISECONDS.sleep(200);
             } catch (Exception e) {}
         }
 
-        // TODO (Task 2a): Print the winner's name here
+        System.out.println("\n And the winner is... " + winner.getName() + "!");
+        System.out.println(" Final accuracy " + winner.getAccuracy());
+
     }
 
     /**
