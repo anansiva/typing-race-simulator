@@ -1,24 +1,25 @@
 /**
  * Write a description of class Typist here.
  *
- * Starter code generously abandoned by Ty Posaurus, your predecessor,
- * who typed with two fingers and considered that "good enough".
- * He left a sticky note: "the slide-back thing is optional probably".
- * It is not optional. Good luck.
+ * Represents a typist in a typing race simulation.
+ * Each typist has a username, unique identifying symbol, accuracy rating which affects progress and burnout risk,
+ * progress tracker, burnout tracker and burnoutTurns tracker.
+ * Typists can slide forward and backwards, as well as enter burnout which freezes them for a number of turns.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Ananthan Sivakumaran
+ * @version 1.0
  */
 public class Typist
 {
     // Fields of class Typist
-    // Hint: you will need six fields. Think carefully about their types.
-    // One of them tracks how far along the passage the typist has reached.
-    // Another tracks whether the typist is currently burnt out.
-    // A third tracks HOW MANY turns of burnout remain (not just whether they are burnt out).
-    // The remaining three should be fairly obvious.
 
+    private String typistName;
+    private char typistSymbol;
+    private double typistAccuracy;
 
+    private int typistProgress = 0;
+    private boolean burntOut = false;
+    private int burnoutTurns = 0;
 
 
     // Constructor of class Typist
@@ -32,7 +33,9 @@ public class Typist
      */
     public Typist(char typistSymbol, String typistName, double typistAccuracy)
     {
-
+        this.setSymbol(typistSymbol);
+        this.typistName = typistName;
+        this.setAccuracy(typistAccuracy);
     }
 
 
@@ -46,7 +49,8 @@ public class Typist
      */
     public void burnOut(int turns)
     {
-
+        this.burnoutTurns = turns;
+        this.burntOut = true;
     }
 
     /**
@@ -56,7 +60,13 @@ public class Typist
      */
     public void recoverFromBurnout()
     {
-
+        if(this.isBurntOut()) {
+            this.burnoutTurns -= 1;
+        }
+        
+        if(this.getBurnoutTurnsRemaining()==0) {
+            this.burntOut = false;
+        }
     }
 
     /**
@@ -66,7 +76,7 @@ public class Typist
      */
     public double getAccuracy()
     {
-        return 0.0; // placeholder - replace with correct implementation
+        return this.typistAccuracy; 
     }
 
     /**
@@ -78,7 +88,7 @@ public class Typist
      */
     public int getProgress()
     {
-        return 0; // placeholder - replace with correct implementation
+        return this.typistProgress; 
     }
 
     /**
@@ -88,7 +98,7 @@ public class Typist
      */
     public String getName()
     {
-        return ""; // placeholder - replace with correct implementation
+        return this.typistName; 
     }
 
     /**
@@ -98,7 +108,7 @@ public class Typist
      */
     public char getSymbol()
     {
-        return ' '; // placeholder - replace with correct implementation
+        return this.typistSymbol; 
     }
 
     /**
@@ -109,7 +119,7 @@ public class Typist
      */
     public int getBurnoutTurnsRemaining()
     {
-        return 0; // placeholder - replace with correct implementation
+        return burnoutTurns; 
     }
 
     /**
@@ -118,7 +128,9 @@ public class Typist
      */
     public void resetToStart()
     {
-
+        typistProgress = 0;
+        burnoutTurns = 0;
+        burntOut = false;
     }
 
     /**
@@ -128,7 +140,7 @@ public class Typist
      */
     public boolean isBurntOut()
     {
-        return false; // placeholder - replace with correct implementation
+        return this.burntOut; 
     }
 
     /**
@@ -137,7 +149,7 @@ public class Typist
      */
     public void typeCharacter()
     {
-
+        this.typistProgress += 1;
     }
 
     /**
@@ -148,7 +160,11 @@ public class Typist
      */
     public void slideBack(int amount)
     {
+        this.typistProgress -= amount;
 
+        if(this.typistProgress < 0) {
+            this.typistProgress = 0;
+        }
     }
 
     /**
@@ -159,7 +175,14 @@ public class Typist
      */
     public void setAccuracy(double newAccuracy)
     {
+        this.typistAccuracy = newAccuracy;
 
+        if(this.typistAccuracy < 0) {
+            this.typistAccuracy = 0.0;
+        }
+        else if(this.typistAccuracy > 1) {
+            this.typistAccuracy = 1.0;
+        }
     }
 
     /**
@@ -169,7 +192,7 @@ public class Typist
      */
     public void setSymbol(char newSymbol)
     {
-
+        this.typistSymbol = newSymbol; 
     }
 
 }
