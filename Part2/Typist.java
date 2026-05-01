@@ -7,6 +7,10 @@
  * @author Ananthan Sivakumaran
  * @version 1.2
  */
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Typist
 {
     // Fields of class Typist
@@ -14,12 +18,31 @@ public class Typist
     private String typistName;
     private char typistSymbol;
     private double typistAccuracy;
-
     private int typistProgress = 0;
     private boolean burntOut = false;
     private int burnoutTurns = 0;
 
     private boolean justMistyped = false;
+
+    private String typingStyle;
+    private String keyboardType;
+    private String accessory;
+    private String color;
+
+    private String sponsor = "None";
+    private double sponsorBonus = 0.0;
+    private boolean sponsorConditionMet = false;
+
+    private int burnoutCount = 0;
+    private int totalKeystrokes = 0;
+    private int correctKeystrokes = 0;
+    private double startingAccuracy;
+
+    private int cumulativePoints = 0;
+    private double earnings = 0.0;
+    private double bestWPM = 0.0;
+    private List<Double> wpmHistory = new ArrayList<>();
+    private List<Double> accuracyHistory = new ArrayList<>();
 
     // Constructor of class Typist
     /**
@@ -37,6 +60,7 @@ public class Typist
         this.setSymbol(typistSymbol);
         this.typistName = typistName;
         this.setAccuracy(typistAccuracy);
+        this.startingAccuracy = typistAccuracy;
     }
 
 
@@ -51,6 +75,7 @@ public class Typist
     {
         this.burnoutTurns = turns;
         this.burntOut = true;
+        this.burnoutCount++;
     }
 
     /**
@@ -131,6 +156,12 @@ public class Typist
         typistProgress = 0;
         burnoutTurns = 0;
         burntOut = false;
+        justMistyped = false;
+        burnoutCount = 0;
+        totalKeystrokes = 0;
+        correctKeystrokes = 0;
+        startingAccuracy = typistAccuracy;
+        sponsorConditionMet = false;
     }
 
     /**
@@ -150,6 +181,8 @@ public class Typist
     public void typeCharacter()
     {
         this.typistProgress += 1;
+        this.totalKeystrokes++;
+        this.correctKeystrokes++;
     }
 
     /**
@@ -165,6 +198,8 @@ public class Typist
         if(this.typistProgress < 0) {
             this.typistProgress = 0;
         }
+
+        this.totalKeystrokes++;
     }
 
     /**
@@ -207,4 +242,80 @@ public class Typist
         this.justMistyped = justMistyped; 
     }
 
+    public int getBurnoutCount() {
+        return this.burnoutCount;
+    }
+    
+    public int getTotalKeystrokes() {
+        return this.totalKeystrokes;
+    }
+
+    public int getCorrectKeystrokes() {
+        return this.correctKeystrokes;
+    }
+
+    public double getStartingAccuracy() {
+        return this.startingAccuracy;
+    }
+    
+    public double getAccuracyPercentage() {
+        if (totalKeystrokes == 0) return 100.0;
+        return (double) correctKeystrokes / totalKeystrokes * 100.0;
+    }
+
+    public double getBestWPM() {
+        return this.bestWPM;
+    }
+
+    public int getCumulativePoints() {
+        return this.cumulativePoints;
+    }
+
+    public double getEarnings() {
+        return this.earnings;
+    }
+
+    public List<Double> getWpmHistory() {
+        return this.wpmHistory;
+    }
+
+    public List<Double> getAccuracyHistory() {
+        return this.accuracyHistory;
+    }
+
+    public void updateBestWPM(double wpm)
+    {
+        if (wpm > bestWPM) bestWPM = wpm;
+    }
+
+    public void addPoints(int points) { this.cumulativePoints += points; }
+    public void addEarnings(double amount) { this.earnings += amount; }
+
+    public void addRaceHistory(double wpm, double accuracy)
+    {
+        wpmHistory.add(wpm);
+        accuracyHistory.add(accuracy);
+    }
+
+    public String getTypingStyle() { return typingStyle; }
+    public String getKeyboardType() { return keyboardType; }
+    public String getAccessory() { return accessory; }
+    public String getColor() { return color; }
+
+    public void setTypingStyle(String style) { this.typingStyle = style; }
+    public void setKeyboardType(String keyboard) { this.keyboardType = keyboard; }
+    public void setAccessory(String accessory) { this.accessory = accessory; }
+    public void setColor(String color) { this.color = color; }
+
+    public String getSponsor() { return sponsor; }
+    public double getSponsorBonus() { return sponsorBonus; }
+    public boolean isSponsorConditionMet() { return sponsorConditionMet; }
+
+    public void setSponsor(String sponsor, double bonus)
+    {
+        this.sponsor = sponsor;
+        this.sponsorBonus = bonus;
+    }
+
+    public void setSponsorConditionMet(boolean met) { this.sponsorConditionMet = met; }
 }
