@@ -195,11 +195,13 @@ public class Typist
         this.typistSymbol = newSymbol; 
     }
 
+    //Gets justMistyped field
     public boolean justMistyped() 
     { 
         return this.justMistyped; 
     }
 
+    //Sets justMistyped field
     public void setJustMistyped(boolean justMistyped) 
     { 
         this.justMistyped = justMistyped; 

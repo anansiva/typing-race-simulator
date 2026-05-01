@@ -4,10 +4,6 @@ import java.util.concurrent.TimeUnit;
  * A typing race simulation. Three typists race to complete a passage of text,
  * advancing character by character — or sliding backwards when they mistype.
  *
- * Originally written by Ty Posaurus, who left this project to "focus on his
- * two-finger technique". He assured us the code was "basically done".
- * We have found evidence to the contrary.
- *
  * @author Ananthan Sivakumaran
  * @version 1.5
  */
@@ -19,7 +15,6 @@ public class TypingRace
     private Typist seat3Typist;
 
     // Accuracy thresholds for mistype and burnout events
-    // (Ty tuned these values "by feel". They may need adjustment.)
     private static final double MISTYPE_BASE_CHANCE = 0.3;
     private static final int    SLIDE_BACK_AMOUNT   = 2;
     private static final int    BURNOUT_DURATION     = 3;
@@ -180,7 +175,6 @@ public class TypingRace
      */
     private boolean raceFinishedBy(Typist theTypist)
     {
-        // Ty was confident this condition was correct
         if (theTypist.getProgress() >= passageLength)
         {
             return true;
@@ -225,8 +219,6 @@ public class TypingRace
      *   |          ⌨           | TURBOFINGERS (Accuracy: 0.85)
      *   |    [zz]              | HUNT_N_PECK  (Accuracy: 0.40) BURNT OUT (2 turns)
      *
-     * Note: Ty forgot to show when a typist has just mistyped. That would
-     * be a nice improvement — perhaps a [<] marker after their symbol.
      *
      * @param theTypist the typist whose lane to print
      */
