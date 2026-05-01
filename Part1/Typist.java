@@ -5,7 +5,7 @@
  * Typists can slide forward and backwards, as well as enter burnout which freezes them for a number of turns.
  *
  * @author Ananthan Sivakumaran
- * @version 1.0
+ * @version 1.2
  */
 public class Typist
 {
@@ -21,7 +21,6 @@ public class Typist
 
     private boolean justMistyped = false;
 
-
     // Constructor of class Typist
     /**
      * Constructor for objects of class Typist.
@@ -31,6 +30,8 @@ public class Typist
      * @param typistName    the name of the typist (e.g. "TURBOFINGERS")
      * @param typistAccuracy the typist's accuracy rating, between 0.0 and 1.0
      */
+
+
     public Typist(char typistSymbol, String typistName, double typistAccuracy)
     {
         this.setSymbol(typistSymbol);
@@ -40,7 +41,6 @@ public class Typist
 
 
     // Methods of class Typist
-
     /**
      * Sets this typist into a burnout state for a given number of turns.
      * A burnt-out typist cannot type until their burnout has worn off.

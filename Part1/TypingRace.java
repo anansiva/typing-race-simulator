@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * We have found evidence to the contrary.
  *
  * @author Ananthan Sivakumaran
- * @version 1.4
+ * @version 1.5
  */
 public class TypingRace
 {
